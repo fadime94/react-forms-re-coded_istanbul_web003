@@ -1,13 +1,14 @@
 import React from 'react'
-import Form from "./Form1"
+import Form from "./Form"
+import DisplayData from "./DisplayData"
 
 export default class ParentComponent extends React.Component {
     state = {
         firstName: "",
         lastName: "",
       }
-
-      handleFirstNameChange = event => {
+      //instead of repeating code we can have handleChange
+     /*  handleFirstNameChange = event => {
         this.setState({
           firstName: event.target.value
         })
@@ -17,15 +18,23 @@ export default class ParentComponent extends React.Component {
         this.setState({
           lastName: event.target.value
         })
-      }
+      } */
      
+      handleChange = event => {
+        this.setState({
+          [event.target.name]: event.target.value
+        })
+      }
+
       render() {
         return (
-          <Form
-            formData={this.state}
-            handleFirstNameChange={this.handleFirstNameChange}
-            handleLastNameChange={this.handleLastNameChange}
-          />
+            <div>
+                <Form
+                    formData={this.state}
+                    handleChange={this.handleChange}
+                />
+                <DisplayData formData={this.state} />
+            </div>
         )
       }
 }
